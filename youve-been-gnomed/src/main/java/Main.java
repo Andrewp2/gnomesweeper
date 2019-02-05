@@ -1,8 +1,11 @@
-import net.dv8tion.jda.api.AccountType;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.internal.requests.Route;
+import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.events.Event;
+import net.dv8tion.jda.core.events.message.GenericMessageEvent;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.hooks.EventListener;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
@@ -25,7 +28,8 @@ public class Main extends ListenerAdapter {
             e.printStackTrace();
         }
         builder.setToken(token);
-        builder.addEventListeners(new Main());
+        builder.addEventListener(new Main());
+        builder.setGame(Game.playing("!gnomePlay | By @Andrew Peterson#9999 "));
         builder.build();
     }
 
@@ -34,8 +38,9 @@ public class Main extends ListenerAdapter {
         if(event.getMessage().getContentRaw().equals("!gnomePlay") && lastUsed + 3000 < System.currentTimeMillis()) {
             lastUsed = System.currentTimeMillis();
             Board board = new Board(10, 10);
-            board.generate(12);
+            board.generate(14);
             event.getChannel().sendMessage(board.toDiscordString()).queue();
         }
     }
+
 }
