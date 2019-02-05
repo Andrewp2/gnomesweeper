@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/gnomesweeper.iml" filepath="$PROJECT_DIR$/.idea/gnomesweeper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/youve-been-gnomed.iml" filepath="$PROJECT_DIR$/.idea/modules/youve-been-gnomed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/youve-been-gnomed_main.iml" filepath="$PROJECT_DIR$/.idea/modules/youve-been-gnomed_main.iml" group="youve-been-gnomed" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/youve-been-gnomed_test.iml" filepath="$PROJECT_DIR$/.idea/modules/youve-been-gnomed_test.iml" group="youve-been-gnomed" />
     </modules>
   </component>
 </project>
