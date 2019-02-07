@@ -15,9 +15,7 @@ import java.io.InputStreamReader;
 
 
 public class Main extends ListenerAdapter {
-    public static long lastUsed = 0L;
     public static void main(String[] args) throws LoginException {
-        lastUsed = System.currentTimeMillis();
         JDABuilder builder = new JDABuilder(AccountType.BOT);
         InputStream source = Main.class.getClassLoader().getResourceAsStream("token");
         BufferedReader bf = new BufferedReader(new InputStreamReader(source));
@@ -35,8 +33,7 @@ public class Main extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if(event.getMessage().getContentRaw().equals("!gnomePlay") && lastUsed + 3000 < System.currentTimeMillis()) {
-            lastUsed = System.currentTimeMillis();
+        if(event.getMessage().getContentRaw().equals("!gnomePlay")) {
             Board board = new Board(10, 10);
             board.generate(14);
             event.getChannel().sendMessage(board.toDiscordString()).queue();
