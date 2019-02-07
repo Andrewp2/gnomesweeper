@@ -101,6 +101,7 @@ public class Board {
 
     public String toDiscordString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("Hohoho me old chum, ready to play again?\n");
         for(int x = 0; x < squares.length; x++) {
             for(int y = 0; y < squares[0].length; y++) {
                 sb.append("||");

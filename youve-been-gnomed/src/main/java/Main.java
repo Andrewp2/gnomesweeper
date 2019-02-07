@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 
 
 public class Main extends ListenerAdapter {
+    private int numberOfGamesServed = 0;
     public static void main(String[] args) throws LoginException {
         JDABuilder builder = new JDABuilder(AccountType.BOT);
         InputStream source = Main.class.getClassLoader().getResourceAsStream("token");
@@ -27,16 +28,40 @@ public class Main extends ListenerAdapter {
         }
         builder.setToken(token);
         builder.addEventListener(new Main());
-        builder.setGame(Game.playing("!gnomePlay | By @Andrew Peterson#9999 "));
+        builder.setGame(Game.playing("!gnomeHelp | By @Andrew Peterson#9999 "));
         builder.build();
     }
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if(event.getMessage().getContentRaw().equals("!gnomePlay")) {
-            Board board = new Board(10, 10);
-            board.generate(14);
-            event.getChannel().sendMessage(board.toDiscordString()).queue();
+        String message = event.getMessage().getContentRaw();
+        switch(message) {
+            case "!gnomePlay":
+            case "!gnomeplay":
+            case "!gnoP":
+            case "!gnop":
+                Board board = new Board(10, 10);
+                board.generate(16);
+                numberOfGamesServed++;
+                event.getChannel().sendMessage(board.toDiscordString()).queue();
+                break;
+            case "!gnomeCount":
+            case "!gnomecount":
+            case "!gnoC":
+            case "!gnoc":
+                event.getChannel().sendMessage("Number of gnomeSweeper games served: "+numberOfGamesServed).queue();
+                break;
+            case "!gnomeHelp":
+                String help = "Commands:\n" +
+                        "```\n" +
+                        "!gnomePlay : Starts a new game of gnomeSweeper.\n" +
+                        "Aliases: !gnomeplay, !gnoP, !gnop\n\n" +
+                        "!gnomeCount : Says number of games served since last restart.\n" +
+                        "Aliases: !gnomecount, !gnoC, !gnoc\n" +
+                        "```";
+                event.getChannel().sendMessage(help).queue();
+                break;
+
         }
     }
 
