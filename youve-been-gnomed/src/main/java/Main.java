@@ -34,30 +34,26 @@ public class Main extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        String message = event.getMessage().getContentRaw();
+        String message = event.getMessage().getContentRaw().toLowerCase();
+        
         switch(message) {
-            case "!gnomePlay":
             case "!gnomeplay":
-            case "!gnoP":
             case "!gnop":
                 Board board = new Board(10, 10);
                 board.generate(16);
                 numberOfGamesServed++;
                 event.getChannel().sendMessage(board.toDiscordString()).queue();
                 break;
-            case "!gnomeCount":
             case "!gnomecount":
-            case "!gnoC":
             case "!gnoc":
                 event.getChannel().sendMessage("Number of gnomeSweeper games served: "+numberOfGamesServed).queue();
                 break;
-            case "!gnomeHelp":
+            case "!gnomehelp":
                 String help = "Commands:\n" +
                         "```\n" +
                         "!gnomePlay : Starts a new game of gnomeSweeper.\n" +
-                        "Aliases: !gnomeplay, !gnoP, !gnop\n\n" +
                         "!gnomeCount : Says number of games served since last restart.\n" +
-                        "Aliases: !gnomecount, !gnoC, !gnoc\n" +
+                        "Accepts all commands in any case."+
                         "```";
                 event.getChannel().sendMessage(help).queue();
                 break;
