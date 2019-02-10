@@ -20,6 +20,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 
 public class Main {
@@ -47,8 +49,10 @@ public class Main {
         client.addCommands(new Play(Permission.MESSAGE_WRITE), new Count(Permission.MESSAGE_WRITE));
         java.util.function.Consumer<CommandEvent> helpConsumer = (event) -> {
             try {
-                Help.class.getDeclaredMethod("execute", CommandEvent.class);
-            } catch (NoSuchMethodException e) {
+                Method method = Help.class.getDeclaredMethod("execute", CommandEvent.class);
+                method.setAccessible(true);
+                method.invoke(new Help(Permission.MESSAGE_WRITE), event);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         };
@@ -62,30 +66,6 @@ public class Main {
 
         builder.addEventListener(waiter).addEventListener(client.build());
         builder.build();
-    }
-
-    public void onMessageReceived(MessageReceivedEvent event) {
-        String message = event.getMessage().getContentRaw().toLowerCase();
-        
-        switch(message) {
-            case "!gnomeplay":
-            case "!gnop":
-                break;
-            case "!gnomecount":
-            case "!gnoc":
-                event.getChannel().sendMessage("Number of gnomeSweeper games served: "+numberOfGamesServed).queue();
-                break;
-            case "!gnomehelp":
-                String help = "Commands:\n" +
-                        "```\n" +
-                        "!gnomePlay : Starts a new game of gnomeSweeper.\n" +
-                        "!gnomeCount : Says number of games served since last restart.\n" +
-                        "Accepts all commands in any case."+
-                        "```";
-                event.getChannel().sendMessage(help).queue();
-                break;
-
-        }
     }
 
 }

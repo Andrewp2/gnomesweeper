@@ -2,19 +2,11 @@ package commands;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import com.jagrosh.jdautilities.commons.JDAUtilitiesInfo;
 import com.jagrosh.jdautilities.doc.standard.CommandInfo;
 import com.jagrosh.jdautilities.examples.doc.Author;
 import game.Board;
 import main.Main;
-import net.dv8tion.jda.bot.entities.ApplicationInfo;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.Permission;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.awt.*;
 
 /**
  *
@@ -24,6 +16,7 @@ import java.awt.*;
         name = "gnomePlay",
         description = "Lets you play a game of gnomeSweeper."
 )
+
 @Author("Andrew Peterson (andrewp2)")
 public class Play extends Command {
 
@@ -34,14 +27,27 @@ public class Play extends Command {
         this.aliases = new String[]{"gnop"};
         this.guildOnly = false;
         this.botPermissions = perms;
+        this.cooldownScope = CooldownScope.CHANNEL;
+        this.cooldown = 30;
     }
 
 
     @Override
     protected void execute(CommandEvent event) {
-        Board board = new Board(10,10);
-        board.generate(16);
-        Main.numberOfGamesServed++;
-        event.reply(board.toDiscordString());
+        if (event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
+            event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try #botposting instead.");
+        } else {
+            Board board = new Board(10, 10);
+            board.generate(16);
+            Main.numberOfGamesServed++;
+            event.reply(board.toDiscordString());
+        }
     }
+
+    @Override
+    public String getCooldownError(CommandEvent event, int remaining) {
+
+        return "Hold on there <:gnome:542176480315179048>, you have to wait " + remaining + " more seconds to use that command in this channel.";
+    }
+
 }

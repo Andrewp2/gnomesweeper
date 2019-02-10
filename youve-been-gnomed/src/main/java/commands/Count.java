@@ -25,11 +25,24 @@ public class Count extends Command {
         this.aliases = new String[]{"gnoc"};
         this.guildOnly = false;
         this.botPermissions = perms;
+        this.cooldownScope = CooldownScope.CHANNEL;
+        this.cooldown = 30;
     }
 
 
     @Override
     protected void execute(CommandEvent event) {
-        event.reply("There have been " + Main.numberOfGamesServed + " games served.");
+        if (event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
+            event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try #botposting instead.");
+        } else {
+            event.reply("There have been " + Main.numberOfGamesServed + " games served.");
+        }
     }
+
+
+    @Override
+    public String getCooldownError(CommandEvent event, int remaining) {
+        return "Hold on there <:gnome:542176480315179048>, you have to wait " + remaining + " more seconds to use that command in this channel.";
+    }
+
 }
