@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 
 
 public class Main {
-    public static int numberOfGamesServed = 170;
+    public static int numberOfGamesServed = 0;
     public static void main(String[] args) throws LoginException {
         InputStream source = Main.class.getClassLoader().getResourceAsStream("token");
         BufferedReader bf = new BufferedReader(new InputStreamReader(source));

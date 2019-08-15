@@ -38,7 +38,7 @@ public class Play extends Command {
             event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try <#385085233717837837> instead.");
         } else {
             Board board = new Board(10, 10);
-            board.generate(16);
+            board.generate(20);
             Main.numberOfGamesServed++;
             event.reply(board.toDiscordString());
         }

@@ -4,6 +4,8 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import net.dv8tion.jda.core.Permission;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Andrew Peterson(andrewp2)
@@ -13,7 +15,7 @@ public class Help extends Command {
         this.name = "gnomeHelp";
         this.help = "Returns help";
         this.hidden = true;
-        this.aliases = new String[]{"gHelp", "ghelp"};
+        this.aliases = new String[]{"gnoHelp", "gnohelp"};
         this.guildOnly = false;
         this.botPermissions = perms;
         this.cooldownScope = CooldownScope.CHANNEL;
@@ -22,7 +24,7 @@ public class Help extends Command {
 
     @Override
     protected void execute(CommandEvent event) {
-        if (event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
+        if (event.getChannelType().isGuild() && event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
             event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try <#385085233717837837> instead.");
         } else {
             String help = "Commands:\n" +

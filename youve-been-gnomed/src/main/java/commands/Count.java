@@ -32,7 +32,7 @@ public class Count extends Command {
 
     @Override
     protected void execute(CommandEvent event) {
-        if (event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
+        if (event.getChannelType().isGuild() && event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
             event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try <#385085233717837837> instead.");
         } else {
             event.reply("There have been " + Main.numberOfGamesServed + " games served since last restart.");
