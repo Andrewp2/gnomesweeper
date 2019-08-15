@@ -6,14 +6,11 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import commands.Count;
 import commands.Help;
 import commands.Play;
-import game.Board;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
@@ -25,7 +22,7 @@ import java.lang.reflect.Method;
 
 
 public class Main {
-    public static int numberOfGamesServed = 0;
+    public static int numberOfGamesServed = 170;
     public static void main(String[] args) throws LoginException {
         InputStream source = Main.class.getClassLoader().getResourceAsStream("token");
         BufferedReader bf = new BufferedReader(new InputStreamReader(source));

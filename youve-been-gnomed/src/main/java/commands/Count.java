@@ -22,7 +22,7 @@ public class Count extends Command {
     {
         this.name = "gnomeCount";
         this.help = "Counts number of games served.";
-        this.aliases = new String[]{"gnoc"};
+        this.aliases = new String[]{"gnoc", "gnomec", "gnoC", "gnomeC"};
         this.guildOnly = false;
         this.botPermissions = perms;
         this.cooldownScope = CooldownScope.CHANNEL;
@@ -33,9 +33,9 @@ public class Count extends Command {
     @Override
     protected void execute(CommandEvent event) {
         if (event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
-            event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try #botposting instead.");
+            event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try <#385085233717837837> instead.");
         } else {
-            event.reply("There have been " + Main.numberOfGamesServed + " games served.");
+            event.reply("There have been " + Main.numberOfGamesServed + " games served since last restart.");
         }
     }
 

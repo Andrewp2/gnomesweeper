@@ -24,7 +24,7 @@ public class Play extends Command {
     {
         this.name = "gnomePlay";
         this.help = "lets you play a game of gnomesweeper";
-        this.aliases = new String[]{"gnop"};
+        this.aliases = new String[]{"gnop", "gnoP"};
         this.guildOnly = false;
         this.botPermissions = perms;
         this.cooldownScope = CooldownScope.CHANNEL;
@@ -34,8 +34,8 @@ public class Play extends Command {
 
     @Override
     protected void execute(CommandEvent event) {
-        if (event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
-            event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try #botposting instead.");
+        if (event.getChannelType().isGuild() && event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
+            event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try <#385085233717837837> instead.");
         } else {
             Board board = new Board(10, 10);
             board.generate(16);

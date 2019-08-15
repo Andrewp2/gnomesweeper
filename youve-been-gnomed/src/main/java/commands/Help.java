@@ -13,7 +13,7 @@ public class Help extends Command {
         this.name = "gnomeHelp";
         this.help = "Returns help";
         this.hidden = true;
-        this.aliases = new String[]{""};
+        this.aliases = new String[]{"gHelp", "ghelp"};
         this.guildOnly = false;
         this.botPermissions = perms;
         this.cooldownScope = CooldownScope.CHANNEL;
@@ -23,11 +23,11 @@ public class Help extends Command {
     @Override
     protected void execute(CommandEvent event) {
         if (event.getGuild().getName().equals("destiny.gg") && !event.getChannel().getName().equals("botposting")) {
-            event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try #botposting instead.");
+            event.reply("Can't use that command in this channel in d.gg <:gnome:542176480315179048>, try <#385085233717837837> instead.");
         } else {
             String help = "Commands:\n" +
                     "```\n" +
-                    "!gnomePlay | !gnoC : Starts a new game of gnomeSweeper.\n" +
+                    "!gnomePlay | !gnoP : Starts a new game of gnomeSweeper.\n" +
                     "!gnomeCount | !gnoC : Says number of games served since last restart.\n" +
                     "Accepts all commands in any case.\n" +
                     "Does not work in any chat channel other than #botposting in d.gg." +
